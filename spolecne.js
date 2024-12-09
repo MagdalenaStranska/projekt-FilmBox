@@ -11,9 +11,9 @@
 //     menuShow.classList.toggle('show');
 // })
 
-document.querySelector('#menu-tlacitko').addEventListener('click', () => {
-const menuShow = document.querySelector('#menu-polozky').classList.toggle('show')
-})
+// document.querySelector('#menu-tlacitko').addEventListener('click', () => {
+// const menuShow = document.querySelector('#menu-polozky').classList.toggle('show')
+// })
 
 // Bonus
 // Změňte ikonku tlačítka na křížek, pokud je menu rozbalené a na hamburger, pokud je sbalené.
@@ -21,3 +21,19 @@ const menuShow = document.querySelector('#menu-polozky').classList.toggle('show'
 // HTML ikonky křížku: <i class="fas fa-xmark"></i>
 // HTML ikonky hamburgeru: <i class="fas fa-bars"></i>
 
+const menuButton = document.querySelector('#menu-tlacitko');
+const menuItems = document.querySelector('#menu-polozky');
+
+menuButton.addEventListener('click', () => {
+    const isExpanded = menuItems.classList.toggle('show');
+
+    const icon = menuButton.querySelector('i');
+
+    if (isExpanded) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-xmark');
+    } else {
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+    }
+});

@@ -1,5 +1,18 @@
 const filmy = [
 	{
+		id: 'hobit1',
+		nazev: 'Hobit: Neočekávaná cesta',
+		plakat: {
+			url: 'https://static.posters.cz/image/750/plakaty/hobit-neocekavana-cesta-i34677.jpg',
+			sirka: 663,
+			vyska: 909,
+		},
+		ochutnavka: 'Hobit Bilbo Pytlík se ocitne na dobrodružné výpravě',
+		popis:
+			'Film sleduje cestu hlavní postavy Bilbo Pytlíka, který se ocitne na dobrodružné výpravě. Cílem cesty je si znovu nárokovat ztracené trpasličí království Erebor. Bilba nečekaně osloví čaroděj Gandalf Šedý, díky kterému se ocitne ve společnosti třinácti trpaslíků v čele s legendárním bojovníkem Thorinem. Cesta do divočiny vede přes tajemné země, kde se to hemží zlobry, skřety a kouzelníky. Ačkoliv cíl jejich výpravy - Osamělá hora, leží na Východě, musí projít nejdříve jeskynním systémem, kde Bilbo potká někoho, kdo mu navždy změní život…Gluma. Skromný Bilbo Pytlík pak sám s Glumem na břehu podzemního jezera objeví nejen hloubku lstivosti a odvahy, která překvapí i jeho samotného, ale také získá do svého vlastnictví Glumův prsten „miláška“, který má nečekané a užitečné možnosti... Jednoduchý zlatý prsten je spojen s osudem celé Středozemě takovým způsobem, jaký Bilbo nemůže zatím ani tušit. (oficiální text distributora)',
+		premiera: '2012-12-13',
+	},
+	{
 		id: 'pelisky',
 		nazev: 'Pelíšky',
 		plakat: {
@@ -221,6 +234,7 @@ form.addEventListener('submit', (event) => {
 
 	if (messageInput.value.trim() === '') {
 		messageInput.classList.add('is-invalid');
+		messageInput.focus();
 		isValid = false;
 	} else {
 		messageInput.classList.remove('is-invalid');
@@ -228,6 +242,7 @@ form.addEventListener('submit', (event) => {
 	
 	if (!termsCheckbox.checked) {
 		termsCheckbox.classList.add('is-invalid');
+		termsCheckbox.focus();
 		isValid = false;
 	} else {
 		termsCheckbox.classList.remove('is-invalid');
