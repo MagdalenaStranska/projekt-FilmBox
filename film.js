@@ -123,6 +123,14 @@ const filmData = filmy.find((film) => film.id === filmId);
 const detailFilmu = document.querySelector('#detail-filmu');
 // detailFilmu.innerHTML = '';
 
+const daysUntilPremiera = dayjs(filmData.premiera).diff(dayjs(), 'days');
+const premieraText = daysUntilPremiera > 0 
+    ? `což je za ${daysUntilPremiera} dní.` 
+	: daysUntilPremiera === 0
+	? `což je právě dnes!`
+    : `což bylo před ${Math.abs(daysUntilPremiera)} dny.`;
+
+
 detailFilmu.innerHTML = `
 	<div class="row g-0">
 					<div class="col-md-5">
@@ -135,15 +143,14 @@ detailFilmu.innerHTML = `
 						/>
 					</div>
 					<div class="col-md-7">
-						<div class="card-body">
-							<h5 class="card-title">${filmData.nazev}</h5>
-							<p class="card-text">${filmData.popis}</p>
-							<p class="card-text">
-								<small class="text-muted" id="premiera"
-									>Premiéra <strong>24. prosince 2022</strong>, což je za 24
-									dní.</small
-								>
-							</p>
+    					<div class="card-body">
+        					<h5 class="card-title">${filmData.nazev}</h5>
+        					<p class="card-text">${filmData.popis}</p>
+        					<p class="card-text">
+            					<small class="text-muted" id="premiera">
+                					Premiéra <strong>${dayjs(filmData.premiera).format('D. M. YYYY')}</strong>, ${premieraText}
+            					</small>
+        					</p>
 							<h6>Hodnocení</h6>
 							<div class="stars">
 								<button
@@ -251,4 +258,42 @@ form.addEventListener('submit', (event) => {
 	if (isValid) {
 		form.innerHTML = `<p class="card-text">${messageInput.value}</p>`;
 	}
+});
+
+
+let lastClickedHodnoceni = 0;
+
+function highlightStars(count) {
+    const stars = document.querySelectorAll('.fa-star');
+
+    stars.forEach((star, index) => {
+        if (index < count) {
+            star.classList.add('fas');
+            star.classList.remove('far');
+        } else {
+            star.classList.add('far');
+            star.classList.remove('fas');
+        }
+    });
+}
+
+document.querySelectorAll('.fa-star').forEach((star) => {
+    star.addEventListener('click', () => {
+        const starValue = parseInt(star.textContent, 10);
+
+        lastClickedHodnoceni = starValue;
+
+        highlightStars(starValue);
+
+        console.log(`Zvolené hodnocení: ${starValue}`);
+    });
+
+    star.addEventListener('mouseenter', () => {
+        const starValue = parseInt(star.textContent, 10);
+        highlightStars(starValue); 
+    });
+
+    star.addEventListener('mouseleave', () => {
+        highlightStars(lastClickedHodnoceni); 
+    });
 });
